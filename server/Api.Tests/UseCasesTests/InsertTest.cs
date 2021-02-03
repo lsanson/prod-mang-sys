@@ -10,9 +10,9 @@ namespace Api.Tests.UseCasesTests
 {
     public class InsertTest
     {
-        private IImportationService _importationService;
-        private Mock<IImportationService> _serviceMock;
-        private Mock<IFormFile> _formFileMock;
+        // private IImportationService _importationService;
+        // private Mock<IImportationService> _serviceMock;
+        // private Mock<IFormFile> _formFileMock;
 
         public async Task CanInsertFromFile()
         {

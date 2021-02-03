@@ -9,7 +9,6 @@ using Api.Domain.Entities;
 using Api.Domain.Validation;
 using Api.Infra.UnitOfWork;
 using ClosedXML.Excel;
-using Microsoft.AspNetCore.Http;
 
 namespace Api.Services.UseCases
 {
@@ -30,10 +29,10 @@ namespace Api.Services.UseCases
             return (result != null)? (ImportationResponseDto)result : null;
         }
 
-        public IEnumerable<ImportationResponseDto> GetImportations()
+        public IEnumerable<ImportationListResponseDto> GetImportations()
         {
             var result = _unitOfWork.GetImportationRepository().GetImportations();
-            return result.Select(x => (ImportationResponseDto)x);
+            return result.OrderBy(x => x.DeliveryDate).Select(x => (ImportationListResponseDto)x);
         }
 
         public IEnumerable<ValidationError> GetValidationErrors()
