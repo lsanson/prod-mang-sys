@@ -7,9 +7,9 @@ namespace Api.Domain.DTOs
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public int Quantity { get; set; }
-        public decimal UnitValue { get; set; }
-        public DateTime DeliveryDate { get; set; }
+        public int? Quantity { get; set; }
+        public decimal? UnitValue { get; set; }
+        public DateTime? DeliveryDate { get; set; }
 
         public static explicit operator ImportationResponseDto(Importation importation)
         {
