@@ -7,6 +7,6 @@ namespace Api.Infra.UnitOfWork
     public interface IUnitOfWork
     {
         IRepositoryBase<Importation> GetImportationRepository();
-        Task Commit();
+        void Commit();
     }
 }

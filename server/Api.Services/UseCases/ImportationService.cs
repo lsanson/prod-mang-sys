@@ -6,6 +6,7 @@ using System.Linq;
 using Api.Domain.Contracts.Services;
 using Api.Domain.DTOs;
 using Api.Domain.Entities;
+using Api.Domain.Validation;
 using Api.Infra.UnitOfWork;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Http;
@@ -15,68 +16,81 @@ namespace Api.Services.UseCases
     public class ImportationService : IImportationService
     {
         private IUnitOfWork _unitOfWork;
+        private List<ValidationError> _validationErrors;
 
         public ImportationService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _validationErrors = new List<ValidationError>();
         }
 
         public ImportationResponseDto GetImportation(Guid id)
         {
-            throw new NotImplementedException();
+            var result = _unitOfWork.GetImportationRepository().GetImportation(id);
+            return (result != null)? (ImportationResponseDto)result : null;
         }
 
         public IEnumerable<ImportationResponseDto> GetImportations()
         {
-            throw new NotImplementedException();
+            var result = _unitOfWork.GetImportationRepository().GetImportations();
+            return result.Select(x => (ImportationResponseDto)x);
+        }
+
+        public IEnumerable<ValidationError> GetValidationErrors()
+        {
+            return _validationErrors;
         }
 
         public IEnumerable<ImportationResponseDto> InsertImportations(Stream stream)
         {
             if (stream == null)
             {
+                _validationErrors.Add(new ValidationError("Stream", "File can not be null"));
                 return null;
             }
 
             var newImportations = new List<Importation>();
 
-            List<string> headers = null;
             using(var workBook = new XLWorkbook(stream))
             {
                 var worksheet = workBook.Worksheet(1);
-                bool firstRow = true;
-                // string readRange = "1:1";
                 string readRange = string.Format("{0}:{1}", 1, worksheet.FirstRowUsed().LastCellUsed().Address.ColumnNumber);
-                foreach (var row in worksheet.RowsUsed())
+                var headers = worksheet.FirstRowUsed().Cells(readRange).Select(x => x.Value.ToString().Trim()).ToArray();
+                
+                var rows = worksheet.RowsUsed().ToArray();
+                var count = worksheet.RowsUsed().Count();
+                for (int i = 1; i < count; i++)
                 {
-                    if (firstRow)
+                    var rowValues = rows[i].CellsUsed().Select(x => x.Value).ToArray();
+                    string name = Convert.ToString(rowValues[1]);
+                    decimal unitValue = Math.Round(Convert.ToDecimal(rowValues[3]), 2);
+                    int quantity = Convert.ToInt32(rowValues[2]);
+                    DateTime deliveryDate = Convert.ToDateTime(rowValues[0]);
+                    var importation = new Importation(name, quantity, unitValue, deliveryDate);
+                    var validationResult = importation.Validate();
+                    if (validationResult.IsValid)
                     {
-                        headers = row.Cells(readRange).Select(x => x.Value.ToString().Trim()).ToList();
-                        firstRow = false;
+                        newImportations.Add(importation);
                     }
                     else {
-                        int cellIndex = 0;
-                        var tuple = new Dictionary<string, object>();
-
-                        foreach (var cell in row.Cells(readRange))
-                        {
-                            tuple.Add(headers.ElementAt(cellIndex++), cell.Value);
-                        }
-                        var importation = new Importation(Convert.ToString(tuple["Nome do Produto"]), 
-                                                        Convert.ToInt32(tuple["Quantidade"]), 
-                                                        Math.Round(Convert.ToDecimal(tuple["Valor Unitário"]), 2), 
-                                                        Convert.ToDateTime(tuple["Data Entrega"]));
-                        var validationResult = importation.Validate();
-                        if (validationResult.IsValid)
-                        {
-                            newImportations.Add(importation);
-                        }
+                        _validationErrors.AddRange(
+                            validationResult.Errors.Select(x => new ValidationError($"Row {i}", x.ErrorMessage)));
                     }
-                }
-                // determine if excel is empty
+                }                
             }
+            if (!this.IsValid())
+            {
+                return null;
+            }
+
             var result = _unitOfWork.GetImportationRepository().InsertList(newImportations);
+            _unitOfWork.Commit();
             return result.Select(x => (ImportationResponseDto)x);
+        }
+
+        public bool IsValid()
+        {
+            return !_validationErrors.Any();
         }
     }
 }

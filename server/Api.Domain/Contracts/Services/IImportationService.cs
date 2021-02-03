@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Api.Domain.DTOs;
+using Api.Domain.Validation;
 using Microsoft.AspNetCore.Http;
 
 namespace Api.Domain.Contracts.Services
@@ -12,5 +13,8 @@ namespace Api.Domain.Contracts.Services
 
         IEnumerable<ImportationResponseDto> GetImportations();
         ImportationResponseDto GetImportation(Guid id);
+
+        IEnumerable<ValidationError> GetValidationErrors();
+        bool IsValid();
     }
 }

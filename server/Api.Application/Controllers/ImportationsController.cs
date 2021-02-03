@@ -22,7 +22,53 @@ namespace Api.Application.Controllers
         {
             try
             {
-                var result = _importationService.InsertImportations(file.OpenReadStream());
+                var result = await Task.Run(() => _importationService.InsertImportations(file?.OpenReadStream()));
+                if (result == null && !_importationService.IsValid())
+                {
+                    return BadRequest(_importationService.GetValidationErrors());
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, ex);
+            }
+        }
+
+        
+        [HttpGet]
+        public async Task<IActionResult> GetImportations()
+        {
+            try
+            {
+                var result = await Task.Run(() => _importationService.GetImportations());
+                if (result == null)
+                {
+                    return NoContent();
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, ex);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetImportation(Guid id)
+        {
+            try
+            {
+                var result = await Task.Run(() => _importationService.GetImportation(id));
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
                 return Ok(result);
             }
             catch (Exception ex)
