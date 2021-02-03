@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Api.Domain.Validation;
 
 namespace Api.Domain.Entities
 {
@@ -43,14 +45,15 @@ namespace Api.Domain.Entities
 
         [Required(ErrorMessage="Delivery date is mandatory")]
         [DisplayFormat(DataFormatString="dd/mm/yyyy")]
-          
+        [ImportationDateCompare]    
         public DateTime DeliveryDate { get; set; }      
         
         #region Methods
-        private void Validate()
+        private IEnumerable<ValidationResult> Validate()
         {
-
+            return EntityValidator.GetValidationErrors(this);
         }
+
         #endregion
     }
 }
