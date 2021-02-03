@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.Infra.Context;
+using Api.Infra.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,8 @@ namespace Application
             services.AddDbContext<ApiContext>(options => {
                 options.UseNpgsql(Configuration["Database:ConnectionString"]);
             });
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddControllers();
         }
