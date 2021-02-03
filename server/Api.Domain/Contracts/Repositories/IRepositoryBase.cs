@@ -6,8 +6,9 @@ namespace Api.Domain.Contracts.Repositories
     public interface IRepositoryBase<T> 
         where T : class
     {
-        T Create(T entity);
-        T GetById(Guid id);
-        IEnumerable<T> GetAll();
+        T Insert(T entity);
+        IEnumerable<T> InsertList(IEnumerable<T> entities);
+        T GetImportation(Guid id);
+        IEnumerable<T> GetImportations();
     }
 }

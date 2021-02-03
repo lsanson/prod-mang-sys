@@ -18,29 +18,26 @@ namespace Api.Infra.Repositories
             _dataSet = _context.Set<T>();
         }
 
-        public T Create(T entity)
+        public T Insert(T entity)
         {
-            throw new NotImplementedException();
+            _dataSet.Add(entity);
+            return entity;
         }
 
-        public void Delete(Guid id)
+        public IEnumerable<T> InsertList(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            _dataSet.AddRange(entities);
+            return entities;
         }
 
-        public T GetById(Guid id)
+        public T GetImportation(Guid id)
         {
-            throw new NotImplementedException();
+            return _dataSet.Find(id);
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetImportations()
         {
-            throw new NotImplementedException();
-        }
-
-        public T Update(T entity)
-        {
-            throw new NotImplementedException();
+            return _dataSet.AsNoTracking();
         }
     }
 }
