@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Domain.Contracts.Services;
 using Api.Infra.Context;
 using Api.Infra.UnitOfWork;
+using Api.Services.UseCases;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +35,7 @@ namespace Application
             });
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IImportationService, ImportationService>();
 
             services.AddControllers();
         }
