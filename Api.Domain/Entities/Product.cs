@@ -4,6 +4,7 @@ namespace Api.Domain.Entities
 {
     public class Product
     {
+        public Product() {  }
         public Product(string name, int quantity, decimal unitaryValue, DateTime deliveryDate)
         {
             Name = name;
