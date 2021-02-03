@@ -10,6 +10,6 @@ namespace Api.Domain.DTOs
         public decimal UnitValue { get; set; }
         public DateTime DeliveryDate { get; set; }
         
-        public Product ProductBuilder() => new Product(Name, Quantity, UnitValue, DeliveryDate);
+        public Importation ProductBuilder() => new Importation(Name, Quantity, UnitValue, DeliveryDate);
     }
 }

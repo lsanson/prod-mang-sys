@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Api.Domain.Entities
 {
-    public class Product
+    public class Importation
     {
-        public Product() {  }
-        public Product(string name, int quantity, decimal unitaryValue, DateTime deliveryDate)
+        public Importation() {  }
+        public Importation(string name, int quantity, decimal unitaryValue, DateTime deliveryDate)
         {
             Name = name;
             Quantity = quantity;
@@ -16,7 +16,7 @@ namespace Api.Domain.Entities
             Validate();
         }
 
-        public Product(Product p)
+        public Importation(Importation p)
         {
             Name = p.Name;
             Quantity = p.Quantity;

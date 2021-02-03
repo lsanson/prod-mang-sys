@@ -10,16 +10,16 @@ namespace Api.Infra.UnitOfWork
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private ApiContext _context;
-        private IRepositoryBase<Product> _productRepository;
+        private IRepositoryBase<Importation> _productRepository;
 
         public UnitOfWork(ApiContext context)
         {
             _context = context;
         }
         
-        public IRepositoryBase<Product> GetProductRepository()
+        public IRepositoryBase<Importation> GetImportationRepository()
         {
-            _productRepository = _productRepository ?? new RepositoryBase<Product>();
+            _productRepository = _productRepository ?? new RepositoryBase<Importation>(_context);
             return _productRepository;
         }
         

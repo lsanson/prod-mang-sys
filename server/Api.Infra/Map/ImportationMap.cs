@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api.Infra.Map
 {
-    public class ProductMap : IEntityTypeConfiguration<Product>
+    public class ImportationMap : IEntityTypeConfiguration<Importation>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Product> builder)
+        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Importation> builder)
         {
-            builder.ToTable("Products");
+            builder.ToTable("Importations");
 
             builder.HasKey(x => x.Id);
 

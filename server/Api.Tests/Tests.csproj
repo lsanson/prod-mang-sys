@@ -13,4 +13,11 @@
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Api.Domain\Domain.csproj" />
+    <ProjectReference Include="..\Api.Services\Services.csproj" />
+    <ProjectReference Include="..\Api.Infra\Infra.csproj" />
+    <ProjectReference Include="..\Api.Application\Application.csproj" />
+  </ItemGroup>
+
 </Project>

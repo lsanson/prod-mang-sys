@@ -19,7 +19,7 @@ namespace Infra.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.2");
 
-            modelBuilder.Entity("Api.Domain.Entities.Product", b =>
+            modelBuilder.Entity("Api.Domain.Entities.Importation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,7 +29,9 @@ namespace Infra.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
@@ -39,7 +41,7 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Importations");
                 });
 #pragma warning restore 612, 618
         }

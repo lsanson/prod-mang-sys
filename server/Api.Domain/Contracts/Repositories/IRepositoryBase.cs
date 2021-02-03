@@ -7,9 +7,7 @@ namespace Api.Domain.Contracts.Repositories
         where T : class
     {
         T Create(T entity);
-        T Read(Guid id);
-        IEnumerable<T> ReadAll();
-        T Update(T entity);
-        void Delete(Guid id);
+        T GetById(Guid id);
+        IEnumerable<T> GetAll();
     }
 }

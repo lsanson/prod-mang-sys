@@ -10,7 +10,7 @@ namespace Api.Infra.Context
 
         }
 
-        DbSet<Product> Products { get; set; }
+        DbSet<Importation> Importations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
