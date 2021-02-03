@@ -3,7 +3,7 @@ using Api.Domain.Entities;
 
 namespace Api.Domain.DTOs
 {
-    public class CreateProductDto
+    public class CreateImportationDto
     {
         public string Name { get; set; }
         public int Quantity { get; set; }
