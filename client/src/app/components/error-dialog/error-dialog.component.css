@@ -1,0 +1,15 @@
+.error-message {
+  position: relative;
+    padding: 1rem;
+    word-break: break-all;
+    overflow-y: auto;
+  }
+
+.error-message mat-line {
+  margin: 5px 0;
+}
+
+
+::-webkit-scrollbar {
+  width: 0px;
+}

@@ -1,11 +1,11 @@
-.importations {
+.importations-details {
     padding: 2px;
     background: gray;
     display: block;
     justify-content: center;
 }
 
-.importations-card {
+.importations-details-card {
     position: relative;
     width: 100vv;
     height: 100vh;
@@ -34,25 +34,12 @@
     width: 0px;
 }
 
-.importations-table {
+.importations-details-table {
     position: relative;
     width: 100%;
 }
 
-.input-file-wrapper {
-    display: flex;
-    margin: auto;
-}
-
 .mat-flat-button {
-    background-color: #4e4e50;
     width: 200px;
-}
-
-.mat-icon-button {
-    background-color:transparent;
-}
-
-.details-icon {
-    width: 20px;
+    background-color: #4e4e50;
 }

@@ -12,8 +12,7 @@
       "schematics": {
         "@schematics/angular:component": {
           "inlineTemplate": false,
-          "inlineStyle": false,
-          "skipTests": true
+          "skipTests": false
         },
         "@schematics/angular:class": {
           "skipTests": true
@@ -55,6 +54,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css"
             ],
             "scripts": []

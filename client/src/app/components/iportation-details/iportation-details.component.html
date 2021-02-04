@@ -1,19 +1,15 @@
-<div class="importations">
-    <mat-card class="importations-card">
+<div class="importations-details">
+    <mat-card class="importations-details-card">
         <mat-card-header class="importations-card-header">
             <mat-card-title>
-                Importações
+                Detalhe da importação
             </mat-card-title>
         </mat-card-header>
 
         <mat-card-content>
             <div class="table-wrapper">
-                <table mat-table [dataSource]="dataSource" class="importations-table">
-                    <ng-container matColumnDef="id">
-                        <th mat-header-cell *matHeaderCellDef> Id </th>
-                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                    </ng-container>
-            
+                <table mat-table [dataSource]="dataSource" class="importations-details-table">
+                    
                     <ng-container matColumnDef="deliveryDate">
                         <th mat-header-cell *matHeaderCellDef>Data de Entrega</th>
                         <td mat-cell *matCellDef="let element" > {{element.deliveryDate | date:'dd/MM/yyyy' }} </td>
@@ -34,36 +30,21 @@
                         <td mat-cell *matCellDef="let element"> {{element.totalValue | number:'1.2-2'}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="details">
-                        <th mat-header-cell *matHeaderCellDef> Detalhes </th>
-                        <td mat-cell *matCellDef="let element">
-                            <button 
-                                mat-icon-button 
-                                color="secondary"
-                                [routerLink]="['importations', element?.id]">
-                                <img class="details-icon" src="../../../assets/magnifying_glass.svg" alt="Detalhes">
-                            </button>
-                         </td>
-                    </ng-container>
-
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-            </div>            
-
-            <div class="input-file-wrapper">
-                <button mat-flat-button color="primary" class="iport-button">
-                    <input hidden="true" class="select-file-input" id="file" type="file" (change)="onChange($event.target.files)" />
-                    <label for="file" class="file-label">
-                        Importar novo arquivo
-                    </label>
-                </button>
-            </div>
+            </div>       
         </mat-card-content>
+        
+        <div class="go-back-button-wrapper">
+            <button 
+                mat-flat-button 
+                color="primary" 
+                class="go-back-button"
+                [routerLink]="['/']">
+                Voltar
+            </button>
+        </div>
+
     </mat-card>
-    
-
-    
-
-    
 </div>
