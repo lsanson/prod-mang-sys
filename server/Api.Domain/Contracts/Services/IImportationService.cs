@@ -11,7 +11,7 @@ namespace Api.Domain.Contracts.Services
         IEnumerable<ImportationResponseDto> InsertImportations(Stream stream);
 
         IEnumerable<ImportationListResponseDto> GetImportations();
-        ImportationResponseDto GetImportation(Guid id);
+        ImportationResponseDto GetImportation(int id);
 
         IEnumerable<ValidationError> GetValidationErrors();
         bool IsValid();

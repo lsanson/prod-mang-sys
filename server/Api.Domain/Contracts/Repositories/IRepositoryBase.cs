@@ -8,7 +8,7 @@ namespace Api.Domain.Contracts.Repositories
     {
         T Insert(T entity);
         IEnumerable<T> InsertList(IEnumerable<T> entities);
-        T GetImportation(Guid id);
+        T GetImportation(int id);
         IEnumerable<T> GetImportations();
     }
 }

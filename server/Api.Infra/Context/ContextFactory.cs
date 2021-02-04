@@ -7,9 +7,9 @@ namespace Api.Infra.Context
     {
         public ApiContext CreateDbContext(string[] args)
         {
-            var connectionString = "User ID=productApp;Password=prod2020!;Server=localhost;Port=5432;Database=productdb;Integrated Security=true;Pooling=true;";
+            var connectionString = "Data Source=../Api.Application/database.sqlite";
             var optionsBuilder = new DbContextOptionsBuilder<ApiContext>();
-            optionsBuilder.UseNpgsql(connectionString);
+            optionsBuilder.UseSqlite(connectionString);
             
             return new ApiContext(optionsBuilder.Options);
         }

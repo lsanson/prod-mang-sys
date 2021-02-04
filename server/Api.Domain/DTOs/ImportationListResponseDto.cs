@@ -5,7 +5,7 @@ namespace Api.Domain.DTOs
 {
     public class ImportationListResponseDto
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int? Quantity { get; set; }
         public DateTime? DeliveryDate { get; set; }
@@ -14,7 +14,7 @@ namespace Api.Domain.DTOs
         public static explicit operator ImportationListResponseDto(Importation importation)
         {
             return new ImportationListResponseDto() {
-                Id = importation.Id.ToString(),
+                Id = importation.Id,
                 Name = importation.Name,
                 Quantity = importation.Quantity,
                 DeliveryDate = importation.DeliveryDate,

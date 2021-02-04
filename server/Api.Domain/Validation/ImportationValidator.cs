@@ -10,17 +10,17 @@ namespace Api.Domain.Validation
     {
         public ImportationValidator()
         {
-            RuleFor(imp => imp.Name).NotNull().WithName("Name").WithMessage("Name is required")
-                                    .MaximumLength(50).WithName("Name").WithMessage("Name must be up to 50 characters.");
+            RuleFor(imp => imp.Name).NotNull().WithName("Nome do Produto").WithMessage("O nome do produto é obrigatório")
+                                    .MaximumLength(50).WithName("Nome do Produto").WithMessage("Nome do Produto deve ter até 50 caracteres");
 
-            RuleFor(imp => imp.Quantity).NotNull().WithName("Quantity").WithMessage("Quantity is required")
-                                        .GreaterThan(0).WithName("Quantity").WithMessage("Quantity must be greater than or equal to 0.");
+            RuleFor(imp => imp.Quantity).NotNull().WithName("Quantidade").WithMessage("Quantidade é obrigatório is required")
+                                        .GreaterThan(0).WithName("Quantidade").WithMessage("Quantidade deve ser maior ou igual a 0.");
 
-            RuleFor(imp => imp.UnitValue).NotNull().WithName("UnitValue").WithMessage("UnitValue is required")
-                                        .GreaterThan((decimal)0.0).WithName("UnitValue").WithMessage("UnitValue must be greater than or equal to 0.");
+            RuleFor(imp => imp.UnitValue).NotNull().WithName("Valor Unitário").WithMessage("Valor Unitário é obrigatório")
+                                        .GreaterThan((decimal)0.0).WithName("Valor Unitário").WithMessage("Valor Unitário deve ser maior ou igual a 0.");
                                         
-            RuleFor(imp => imp.DeliveryDate).NotNull().WithName("DeliveryDate").WithMessage("DeliveryDate is required.")
-                                            .GreaterThan(DateTime.Today).WithName("DeliveryDate").WithMessage("DeliveryDate must be greater than today.");
+            RuleFor(imp => imp.DeliveryDate).NotNull().WithName("Data de Entrega").WithMessage("Data de Entrega is required.")
+                                            .GreaterThan(DateTime.Today).WithName("Data de Entrega").WithMessage("Data de Entrega deve ser posterior a hoje.");
         }
     }
 }

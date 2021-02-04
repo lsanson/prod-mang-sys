@@ -31,7 +31,7 @@ namespace Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApiContext>(options => {
-                options.UseNpgsql(Configuration["Database:ConnectionString"]);
+                options.UseSqlite(Configuration["Database:ConnectionString"]);
             });
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -53,6 +53,10 @@ namespace Application
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(options => {
+                options.WithOrigins("http://localhost:4200/");
+                options.WithOrigins("http://localhost:4200");
+            });
 
             app.UseEndpoints(endpoints =>
             {

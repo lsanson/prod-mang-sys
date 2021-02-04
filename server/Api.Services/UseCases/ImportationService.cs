@@ -23,7 +23,7 @@ namespace Api.Services.UseCases
             _validationErrors = new List<ValidationError>();
         }
 
-        public ImportationResponseDto GetImportation(Guid id)
+        public ImportationResponseDto GetImportation(int id)
         {
             var result = _unitOfWork.GetImportationRepository().GetImportation(id);
             return (result != null)? (ImportationResponseDto)result : null;
@@ -44,7 +44,7 @@ namespace Api.Services.UseCases
         {
             if (stream == null)
             {
-                _validationErrors.Add(new ValidationError("Stream", "File can not be null"));
+                _validationErrors.Add(new ValidationError("Stream", "O arquivo não pode ser nulo"));
                 return null;
             }
 
@@ -73,7 +73,7 @@ namespace Api.Services.UseCases
                     }
                     else {
                         _validationErrors.AddRange(
-                            validationResult.Errors.Select(x => new ValidationError($"Row {i}", x.ErrorMessage)));
+                            validationResult.Errors.Select(x => new ValidationError($"Linha {i}", x.ErrorMessage)));
                     }
                 }                
             }

@@ -59,7 +59,7 @@ namespace Api.Application.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetImportation(Guid id)
+        public async Task<IActionResult> GetImportation(int id)
         {
             try
             {
