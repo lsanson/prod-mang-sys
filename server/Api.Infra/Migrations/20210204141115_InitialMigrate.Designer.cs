@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20210203190202_InitialMigrate")]
+    [Migration("20210204141115_InitialMigrate")]
     partial class InitialMigrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,10 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Api.Domain.Entities.Importation", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<DateTime?>("DeliveryDate")
                         .HasColumnType("timestamp without time zone");

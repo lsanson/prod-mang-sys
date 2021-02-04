@@ -30,7 +30,7 @@ namespace Api.Infra.Repositories
             return entities;
         }
 
-        public T GetImportation(Guid id)
+        public T GetImportation(int id)
         {
             return _dataSet.Find(id);
         }

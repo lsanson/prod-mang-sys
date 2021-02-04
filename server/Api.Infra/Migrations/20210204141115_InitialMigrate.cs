@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infra.Migrations
 {
@@ -11,7 +12,8 @@ namespace Infra.Migrations
                 name: "Importations",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Quantity = table.Column<int>(type: "integer", nullable: true),
                     UnitValue = table.Column<decimal>(type: "numeric", nullable: true),
